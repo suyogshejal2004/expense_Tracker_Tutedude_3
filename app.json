@@ -13,14 +13,17 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
+     
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
+        "googleServicesFile": "./google-services.json",
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.suyogshejal.expens_Tracker"
     },
     "web": {
       "favicon": "./assets/favicon.png"
