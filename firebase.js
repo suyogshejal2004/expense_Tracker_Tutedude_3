@@ -1,27 +1,59 @@
-/*// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getAuth } from "firebase/auth";
+const API_KEY = "AIzaSyAWpnpgsSXYCUcNjsZOYccCn2v_ltmO3V0"; // Use your Firebase API key here
 
+// Sign up a new user
+export const signUpUser = async (email, password) => {
+  const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
+  const body = JSON.stringify({
+    email,
+    password,
+    returnSecureToken: true,
+  });
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body,
+    });
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyBUs-YibRdmOXGc30_5hiZLx9SLcCDI-W8",
-  authDomain: "expensetracekr.firebaseapp.com",
-  projectId: "expensetracekr",
-  storageBucket: "expensetracekr.firebasestorage.app",
-  messagingSenderId: "48997207447",
-  appId: "1:48997207447:web:376cd08b0032808d3848d2",
-  measurementId: "G-4NC8ZTG7YW",
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.error.message);
+    }
+
+    return data; // Returns user data including the token
+  } catch (error) {
+    throw new Error(error.message || "Failed to register.");
+  }
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const auth = getAuth(app);
-export { auth };
-*/
+// Log in an existing user
+export const loginUser = async (email, password) => {
+  const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
+  const body = JSON.stringify({
+    email,
+    password,
+    returnSecureToken: true,
+  });
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body,
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.error.message);
+    }
+
+    return data; // Returns user data including the token
+  } catch (error) {
+    throw new Error(error.message || "Failed to log in.");
+  }
+};

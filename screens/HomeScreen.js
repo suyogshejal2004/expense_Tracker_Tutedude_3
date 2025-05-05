@@ -89,7 +89,7 @@ const HomeScreen = ({ navigation }) => {
       <TouchableOpacity
         onPress={() => navigation.navigate("Update", { transaction: item })}
       >
-        <MaterialIcons name="edit" size={24} color="#000" />
+       
       </TouchableOpacity>
     </View>
   );
